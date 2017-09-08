@@ -1,15 +1,128 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Popover, Tooltip, OverlayTrigger, Button, Modal} from 'react-bootstrap';
 import './Dashboard.css';
+import Chart from './Components/Chart'
 
+
+let data1 =
+  { "timeRange":[1501570800000,1504249199999],
+    "storageUtilized":[0,5],
+    "incomingBytes":6,
+    "outgoingBytes":0,
+    "numberOfObjects":[0,1],
+    "operations":
+    {
+      "s3:DeleteBucket":0,
+      "s3:DeleteBucketCors":0,
+      "s3:DeleteBucketWebsite":0,
+      "s3:DeleteObjectTagging":0,
+      "s3:ListBucket":0,
+      "s3:GetBucketAcl":0,
+      "s3:GetBucketCors":0,
+      "s3:GetBucketWebsite":0,
+      "s3:GetBucketLocation":0,
+      "s3:CreateBucket":1,
+      "s3:PutBucketAcl":0,
+      "s3:PutBucketCors":0,
+      "s3:PutBucketWebsite":0,
+      "s3:PutObject":1,
+      "s3:CopyObject":0,
+      "s3:UploadPart":0,
+      "s3:ListBucketMultipartUploads":0,
+      "s3:ListMultipartUploadParts":0,
+      "s3:InitiateMultipartUpload":0,
+      "s3:CompleteMultipartUpload":0,
+      "s3:AbortMultipartUpload":0,
+      "s3:DeleteObject":0,
+      "s3:MultiObjectDelete":0,
+      "s3:GetObject":0,
+      "s3:GetObjectAcl":0,
+      "s3:GetObjectTagging":0,
+      "s3:PutObjectAcl":0,
+      "s3:PutObjectTagging":0,
+      "s3:HeadBucket":0,
+      "s3:HeadObject":0,
+      "s3:PutBucketVersioning":0,
+      "s3:GetBucketVersioning":0,
+      "s3:PutBucketReplication":0,
+      "s3:GetBucketReplication":0,
+      "s3:DeleteBucketReplication":0
+    },
+    "bucketName":"utapi-bucket"
+  };
+let data2 =
+  { "timeRange":[1501570800000,1504249199999],
+    "storageUtilized":[0,10],
+    "incomingBytes":12,
+    "outgoingBytes":2,
+    "numberOfObjects":[0,1],
+    "operations":
+    {
+      "s3:DeleteBucket":0,
+      "s3:DeleteBucketCors":0,
+      "s3:DeleteBucketWebsite":0,
+      "s3:DeleteObjectTagging":0,
+      "s3:ListBucket":0,
+      "s3:GetBucketAcl":0,
+      "s3:GetBucketCors":0,
+      "s3:GetBucketWebsite":0,
+      "s3:GetBucketLocation":0,
+      "s3:CreateBucket":1,
+      "s3:PutBucketAcl":0,
+      "s3:PutBucketCors":0,
+      "s3:PutBucketWebsite":0,
+      "s3:PutObject":1,
+      "s3:CopyObject":0,
+      "s3:UploadPart":0,
+      "s3:ListBucketMultipartUploads":0,
+      "s3:ListMultipartUploadParts":0,
+      "s3:InitiateMultipartUpload":0,
+      "s3:CompleteMultipartUpload":0,
+      "s3:AbortMultipartUpload":0,
+      "s3:DeleteObject":0,
+      "s3:MultiObjectDelete":0,
+      "s3:GetObject":0,
+      "s3:GetObjectAcl":0,
+      "s3:GetObjectTagging":0,
+      "s3:PutObjectAcl":0,
+      "s3:PutObjectTagging":0,
+      "s3:HeadBucket":0,
+      "s3:HeadObject":0,
+      "s3:PutBucketVersioning":0,
+      "s3:GetBucketVersioning":0,
+      "s3:PutBucketReplication":0,
+      "s3:GetBucketReplication":0,
+      "s3:DeleteBucketReplication":0
+    },
+    "bucketName":"utapi-bucket"
+  };
+
+let datas = [data1, data2, data1, data1, data2];
 
 
 class Dashboard extends Component {
+
+
+  componentWillMount() {
+    this.getData();
+  }
+
+  getData() {
+    // Ajax calls here
+    this.setState({
+      data: datas
+    });
+  }
+
+
+
+
     constructor() {
     super();
     this.state = {
-      bucketInfo: {}
+      bucketInfo: {},
+      data: []
     }
   }
 
@@ -40,8 +153,11 @@ class Dashboard extends Component {
   e.preventDefault();
   }
 
-
+    
   render() {
+
+     let close = () => this.setState({ show: false});
+
     return (
 
       <div className="App">
@@ -50,63 +166,70 @@ class Dashboard extends Component {
               <Navbar inverse collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <a >Zenko S3 UI</a>
+              <a>Sentry</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
-          <Navbar.Collapse>
+
+           <Navbar.Collapse> 
             <Nav>     
             </Nav>
             <Nav pullRight>
-              <NavDropdown eventKey={3} title="Time Range" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Action</MenuItem>
-                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-              </NavDropdown>
-              <NavDropdown eventKey={3} title="Buckets" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Action</MenuItem>
-                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-              </NavDropdown>
-            </Nav>
+                         <a onClick={() => this.setState({ show: true})}>Time Range
+                        
+                        <div className="modal-container">
+                         <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
+                          <Modal.Header closeButton>
+                          <Modal.Body>
+                              <div className="BucketInfo">
+                                <form onSubmit={this.handleSubmit.bind(this)}>
+                                  <div>
+                                    <label>Bucket Name</label><br />
+                                    <input type="text" ref="bucketName" />
+                                </div>
+                                <div>
+                                  <br />
+                                    <label>Start Date & Time</label><br />
+                                    <input type="date" ref="startDate" />
+                                    <input type="time" ref="startTime" />
+                                </div>
+                                <div>
+                                  <br />
+                                    <label>End Date & Time</label><br />
+                                    <input type="date" ref="endDate" />
+                                    <input type="time" ref="endTime" />
+                                </div>
+                                <br />
+                                    <input type="submit" value="Submit" />
+                              </form>
+                              </div>
+                           </Modal.Body>   
+                          </Modal.Header>  
+                           
+                           <Modal.Footer>
+                            <Button onClick={close}>Close</Button>
+                           </Modal.Footer>
+                        </Modal>                  
+                  </div>       
+              </a>
+                <NavDropdown eventKey={3} title="Buckets" id="basic-nav-dropdown">
+                  <MenuItem eventKey={3.1}>Action</MenuItem>
+                  <MenuItem eventKey={3.2}>Another action</MenuItem>
+                  <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                </NavDropdown>
+              </Nav>
           </Navbar.Collapse>
-        </Navbar>
-        </p>
-
-          <div className="BucketInfo">
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <div>
-          <label>Bucket Name</label><br />
-          <input type="text" ref="bucketName" />
-        </div>
-        <div>
-          <br />
-          <label>Start Date & Time</label><br />
-          <input type="date" ref="startDate" />
-          <input type="time" ref="startTime" />
-        </div>
-        <div>
-          <br />
-          <label>End Date & Time</label><br />
-          <input type="date" ref="endDate" />
-          <input type="time" ref="endTime" />
-        </div>
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-      </div>
+          </Navbar>
+          </p>
+             
+           
+        <Chart data={this.state.data } textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/>
+      
 
 
        </div>
-
-
-      
-   
-
     );
   }
 }

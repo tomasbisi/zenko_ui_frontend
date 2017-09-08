@@ -1,0 +1,36 @@
+.navbar, .navbar-default, .navbar-inverse, .navitem {
+	background-image: none !important;
+	background: linear-gradient(45deg, #f7ef59, #22f9d9, #4af4c6, #35f7f0, #37dff2) !important;
+	background-size: 400% 400% !important;
+	border-style: none !important;
+
+	-webkit-animation: gradient 15s ease infinite !important;
+	-z-animation: gradient 15s ease infinite !important;
+	-o-animation: gradient 15s ease infinite !important;
+	  animation: gradient 15s ease infinite !important;
+}
+
+.navitem {
+	color:white !important;
+}
+
+.divider {
+	background-color: #555 !important;
+}
+
+button {
+	border-style: none !important;
+}
+
+button:hover {
+	background-color:#555 !important;
+}
+
+.`item {
+	color: white !important;
+	background-color: none !important;
+}
+
+.header {
+	color: white;
+}

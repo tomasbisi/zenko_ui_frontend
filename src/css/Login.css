@@ -1,0 +1,106 @@
+.login {
+	height: 100%;
+	width: 100%;
+	left:0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+background: linear-gradient(360deg, #f7ef59, #22f9d9, #4af4c6, #35f7f0, #37dff2);
+background-size: 1800% 1800%;
+
+-webkit-animation: gradient 15s ease infinite;
+-z-animation: gradient 15s ease infinite;
+-o-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+	0%{background-position:0% 82%}
+	50%{background-position:100% 19%}
+	100%{background-position:0% 82%}
+}
+@-moz-keyframes gradient {
+	0%{background-position:0% 82%}
+	50%{background-position:100% 19%}
+	100%{background-position:0% 82%}
+}
+@-o-keyframes gradient {
+	0%{background-position:0% 82%}
+	50%{background-position:100% 19%}
+	100%{background-position:0% 82%}
+}
+@keyframes gradient {
+	0%{background-position:0% 82%}
+	50%{background-position:100% 19%}
+	100%{background-position:0% 82%}
+}
+
+.login {
+	text-align: center;
+}
+
+.sign-in {
+	background-color:#00f742;
+	-moz-border-radius:16px;
+	-webkit-border-radius:16px;
+	border-radius:16px;
+	border: 0px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:white;
+	font-family:Arial;
+	font-size:17px;
+	padding:12px 45px;
+}
+.sign-in:hover {
+	background-color:#4ac408;
+}
+.sign-in:active {
+	position:relative;
+	top:1px;
+}
+
+label {
+	color:white;
+	font-family:Helvetica;
+	font-size:17px;
+}
+
+input[type=text], input[type=password] {
+    /*width: 0%;*/
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 0px solid #ccc;
+	-moz-border-radius:16px;
+	-webkit-border-radius:16px;
+	border-radius:8px;
+    box-sizing: border-box;
+	font-family:Helvetica;
+	font-size:15px;
+	background-color: rgba(255, 255, 255, 0.75);
+}
+
+.form {
+	/*border: 1px solid white;*/
+	width:300px;
+	height:300px;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+
+
+.fade-appear {
+	opacity: 0;
+}
+
+.fade-appear-active {
+	opacity: 1;
+	transition:opacity 1500ms ease-out;
+}
