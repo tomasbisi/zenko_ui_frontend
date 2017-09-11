@@ -127,7 +127,7 @@ class Dashboard extends Component {
   }
 
   handleSubmit(e) {
-    if (this.refs.bucketName.value === '' ||
+    if (
       this.refs.startDate.value === '' ||
       this.refs.startTime.value === '' ||
       this.refs.endDate.value === '' ||
@@ -183,24 +183,20 @@ class Dashboard extends Component {
                           <Modal.Body>
                               <div className="BucketInfo">
                                 <form onSubmit={this.handleSubmit.bind(this)}>
-                                  <div>
-                                    <label>Bucket Name</label><br />
-                                    <input type="text" ref="bucketName" />
-                                </div>
                                 <div>
                                   <br />
-                                    <label>Start Date & Time</label><br />
-                                    <input type="date" ref="startDate" />
+                                    <label style={{color:'black'}}>Start Date & Time</label><br />
+                                    <input style={{margin:'5px'}} type="date" ref="startDate" />
                                     <input type="time" ref="startTime" />
                                 </div>
                                 <div>
                                   <br />
-                                    <label>End Date & Time</label><br />
-                                    <input type="date" ref="endDate" />
+                                    <label style={{color:'black'}}>End Date & Time</label><br />
+                                    <input style={{margin:'5px'}} type="date" ref="endDate" />
                                     <input type="time" ref="endTime" />
                                 </div>
                                 <br />
-                                    <input type="submit" value="Submit" />
+                                    <input type="submit" value="Submit"/>
                               </form>
                               </div>
                            </Modal.Body>   
