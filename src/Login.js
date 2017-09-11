@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import 'css/Login.css';
+import './css/Login.css';
 
 
 // add 'Forgot secret key' ?
