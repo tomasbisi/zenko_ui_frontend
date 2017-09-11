@@ -175,7 +175,7 @@ class Dashboard extends Component {
             <Nav>     
             </Nav>
             <Nav pullRight>
-                         <a onClick={() => this.setState({ show: true})}>Time Range
+                         <NavItem onClick={() => this.setState({ show: true})}>Time Range
                         
                         <div className="modal-container">
                          <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
@@ -211,7 +211,7 @@ class Dashboard extends Component {
                            </Modal.Footer>
                         </Modal>                  
                   </div>       
-              </a>
+              </NavItem>
                 <NavDropdown eventKey={3} title="Buckets" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}>Action</MenuItem>
                   <MenuItem eventKey={3.2}>Another action</MenuItem>

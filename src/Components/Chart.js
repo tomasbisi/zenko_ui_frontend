@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import Color from 'color';
+import '../css/Chart.css';
 
 class Chart extends Component {
 	constructor(props) {
@@ -149,11 +150,13 @@ class Chart extends Component {
 
 	render() {
 		return (
-			<div className='Chart'>
+			<div className='Chart-byte'>
 			<Line
 				data={this.getChartData([this.state.incomingBytes, this.state.outgoingBytes], ['incoming bytes', 'outgoing bytes'], 'hsla(177, 100%, 25%, 1)', false)}
 				options={this.getOptions(true, "incoming & outgoing bytes")}
 			/>
+			
+			
 			<Line
 				data={this.getChartData([this.state.storageUtilized], ['storage utilized'], 'hsla(328, 81%, 41%, 1)', true)}
 				options={this.getOptions(false, "storage utilized")}
