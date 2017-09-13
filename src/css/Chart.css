@@ -1,8 +1,44 @@
-.chart-byte {
-		padding-right: 2em;
-		padding-left: 1em;
-		padding-top: 1em;
-		padding-bottom: 2em;
-		background-color: #fff;
+.grid {
+	width: 62em;
+	height: 100em;
+}
 
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+@media screen and (max-width: 55em) {
+	.grid {
+		width: 31em;
+		height: 100em;
+	}
+
+	.row {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.row > div {
+	width: 30em;
+	height: 15em;
+	padding: 1em 2em;
+	margin: 1em;
+	background-color: white;
+}
+
+.options {
+	cursor:pointer;
+	font-family:Arial;
+	font-size:17px;
+	padding: 3em 3em;
+}
+
+.chart {
+	flex: 3;
+}
+
+.button {
+	flex: 1;
 }

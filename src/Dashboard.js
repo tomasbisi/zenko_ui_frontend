@@ -98,7 +98,9 @@ let data2 =
     "bucketName":"utapi-bucket"
   };
 
-let datas = [data1, data2, data1, data1, data2];
+let data = [data1, data2, data1, data1, data2];
+
+let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 231};
 
 
 class Dashboard extends Component {
@@ -111,7 +113,8 @@ class Dashboard extends Component {
   getData() {
     // Ajax calls here
     this.setState({
-      data: datas
+      data: data,
+	  objects: objects
     });
   }
 
@@ -153,7 +156,7 @@ class Dashboard extends Component {
   e.preventDefault();
   }
 
-    
+
   render() {
 
      let close = () => this.setState({ show: false});
@@ -161,7 +164,7 @@ class Dashboard extends Component {
     return (
 
       <div className="App">
-    
+
         <p className="App-intro">
               <Navbar inverse collapseOnSelect>
           <Navbar.Header>
@@ -171,12 +174,12 @@ class Dashboard extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
 
-           <Navbar.Collapse> 
-            <Nav>     
+           <Navbar.Collapse>
+            <Nav>
             </Nav>
             <Nav pullRight>
                          <NavItem onClick={() => this.setState({ show: true})}>Time Range
-                        
+
                         <div className="modal-container">
                          <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
                           <Modal.Header closeButton>
@@ -199,14 +202,14 @@ class Dashboard extends Component {
                                     <input type="submit" value="Submit"/>
                               </form>
                               </div>
-                           </Modal.Body>   
-                          </Modal.Header>  
-                           
+                           </Modal.Body>
+                          </Modal.Header>
+
                            <Modal.Footer>
                             <Button onClick={close}>Close</Button>
                            </Modal.Footer>
-                        </Modal>                  
-                  </div>       
+                        </Modal>
+                  </div>
               </NavItem>
                 <NavDropdown eventKey={3} title="Buckets" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}>Action</MenuItem>
@@ -219,10 +222,10 @@ class Dashboard extends Component {
           </Navbar.Collapse>
           </Navbar>
           </p>
-             
-           
-        <Chart data={this.state.data } textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/>
-      
+
+
+        <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/>
+
 
 
        </div>
