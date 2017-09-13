@@ -218,7 +218,7 @@ class Chart extends Component {
 						/>
 					</div>
 					<div className='button'>
-						<input type="button" value="Options" className="options"/>
+						<input type="button" value="Operations" className="options"/>
 					</div>
 				</div>
 			</div>
