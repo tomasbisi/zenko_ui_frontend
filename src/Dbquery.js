@@ -49,6 +49,11 @@ function query (param, callback) {
         queryExecute(callback);
     }
 
-    console.log(query.result);
+    var param = {name:"utapi-bucket", start:1501570800000, end:1504249199999};
+
+    query(param, (err, result)=>{
+        console.log(err);
+        console.log(result);
+    });
     // 1. push result to an array. var arr = []. 
 
