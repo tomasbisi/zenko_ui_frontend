@@ -5,6 +5,7 @@ import App from './App';
 import Dashboard from './Dashboard';
 import Login from './Login'
 import Info from './Components/Info'
+
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';

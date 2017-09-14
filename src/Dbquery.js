@@ -1,3 +1,5 @@
+
+
 const AWS = require("aws-sdk");
 AWS.config.loadFromPath('../config.json');
 AWS.config.update({
@@ -11,7 +13,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const dbName = "testdb";
 
 
-function query (param, callback) {
+var query (param, callback) {
         console.log("query");
         console.log("Primary Hash", param.name);
         console.log("start Time ", param.start);
@@ -49,11 +51,16 @@ function query (param, callback) {
         queryExecute(callback);
     }
 
+    var array = [];
+
     var param = {name:"utapi-bucket", start:1501570800000, end:1504249199999};
 
-    query(param, (err, result)=>{
+   query(param, (err, result)=>{
         console.log(err);
         console.log(result);
+        array.push(result)
     });
-    // 1. push result to an array. var arr = []. 
+
+    // buildChart(array);
+    
 

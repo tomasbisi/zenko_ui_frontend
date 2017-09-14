@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Popover, Tooltip, OverlayTrigger, Button, Modal} from 'react-bootstrap';
 import './Dashboard.css';
 import Chart from './Components/Chart'
-
+import AWS from 'aws-sdk';
 
 let data1 =
   { "timeRange":[1501570800000,1504249199999],
     "storageUtilized":[0,5],
-    "incomingBytes":6,
-    "outgoingBytes":0,
+    "incomingBytes":4,
+    "outgoingBytes":8,
     "numberOfObjects":[0,1],
     "operations":
     {
@@ -124,7 +124,8 @@ class Dashboard extends Component {
     constructor() {
     super();
     this.state = {
-      bucketInfo: {},
+      timeRange: {},
+      bucketName: {},
       data: []
     }
   }
@@ -137,14 +138,13 @@ class Dashboard extends Component {
       this.refs.endTime.value === '') {
       alert('Please fill out all fields!');
     } else {
-      this.setState({bucketInfo: {
-        bucketName: this.refs.bucketName.value,
+      this.setState({timeRange: {
         startDate: this.refs.startDate.value,
         startTime: this.refs.startTime.value,
         endDate: this.refs.endDate.value,
         endTime: this.refs.endTime.value
       }}, function() {
-        console.log(this.state.bucketInfo);
+        console.log(this.state.timeRange);
 
         // send credentials to back end
 
@@ -156,6 +156,15 @@ class Dashboard extends Component {
   e.preventDefault();
   }
 
+  handleChange(e) {
+    
+    this.setState({bucketName: {
+      name: this.refs.bucketName.value
+    }}, function(){
+      console.log(this.state.bucketName);
+    });
+    e.preventDefault();
+  }
 
   render() {
 
