@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Datacall } from 'react';
 import logo from './logo.svg';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Popover, Tooltip, OverlayTrigger, Button, Modal} from 'react-bootstrap';
 import './Dashboard.css';
 import Chart from './Components/Chart'
+import DataCall from './Datacall';
 import AWS from 'aws-sdk';
+
 
 let data1 =
   { "timeRange":[1501570800000,1504249199999],
@@ -157,7 +159,7 @@ class Dashboard extends Component {
   }
 
   handleChange(e) {
-    
+
     this.setState({bucketName: {
       name: this.refs.bucketName.value
     }}, function(){
@@ -232,12 +234,18 @@ class Dashboard extends Component {
           </Navbar>
           </p>
 
+            <DataCall />
+            
 
-        <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/>
-
-
+        <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/> 
+       
+        
+        
+          
+        
 
        </div>
+       
     );
   }
 }

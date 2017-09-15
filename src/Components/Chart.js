@@ -5,7 +5,7 @@ import '../css/Chart.css';
 class Chart extends Component {
 	constructor(props) {
 		super(props);
-
+		this.name = "Tomas";
 		this.state = {
 			data: props.data,
 			objects: props.objects,

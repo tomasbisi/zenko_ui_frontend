@@ -13,7 +13,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const dbName = "testdb";
 
 
-var query (param, callback) {
+function query (param, callback) {
         console.log("query");
         console.log("Primary Hash", param.name);
         console.log("start Time ", param.start);
@@ -37,7 +37,7 @@ var query (param, callback) {
                 if (err) {
                 callback(err);
                 } else {
-                    console.log(result)
+                    // console.log(result)
                     items = items.concat(result.Items);
                     if (result.LastEvaluatedKey) {
                         params.ExclusiveStartKey = result.LastEvaluatedKey;
@@ -47,19 +47,21 @@ var query (param, callback) {
                     }
                 }
             });
-        }
+        };
         queryExecute(callback);
     }
 
-    var array = [];
 
+ 
     var param = {name:"utapi-bucket", start:1501570800000, end:1504249199999};
 
    query(param, (err, result)=>{
         console.log(err);
-        console.log(result);
-        array.push(result)
+        console.log(result[1]);
+        console.log(result.data);
     });
+
+
 
     // buildChart(array);
     
