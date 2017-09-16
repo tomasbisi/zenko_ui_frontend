@@ -61,7 +61,7 @@ background-size: 1800% 1800%;
 	top:1px;
 }
 
-label {
+.form > label {
 	color:white;
 	font-family:Helvetica;
 	font-size:17px;

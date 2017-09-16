@@ -99,14 +99,12 @@ class Chart extends Component {
 	}
 
 
-	getOptions(displayLegend, displayAxes, titleText) {
+	getOptions(displayLegend, displayAxes) {
 		return ({
 			responsive: true,
 			maintainAspectRatio: false,
 			title: {
-				display: true,
-				text: titleText,
-				fontSize: 15
+				display: false,
 			},
 			legend: this.getLegend(displayLegend),
 			scales: this.getAxes(displayAxes)
@@ -177,47 +175,51 @@ class Chart extends Component {
 
 	convertValue(value) {
 		if (value >= 1000000000000) {
-			return (value / 1000000000000 + 'T');
+			return (value / 1000000000000 + ' Tb');
 		} else if (value >= 1000000000) {
-			return (value / 1000000000 + 'G');
+			return (value / 1000000000 + ' Gb');
 		} else if (value >= 1000000) {
-			return (value / 1000000 + 'M');
+			return (value / 1000000 + ' Mb');
 		} else if (value >= 1000) {
-			return (value / 1000 + 'K');
+			return (value / 1000 + ' Kb');
 		} else if (value < 10) {
-			return (value.toPrecision(1));
+			return (value.toPrecision(1) + ' b');
 		}
-		return (value);
+		return (value + ' b');
 	}
 
 	render() {
 		return (
 			<div className='grid'>
 				<div className='row'>
-					<div>
+					<div className='chart-bytes'>
+						<label>Incoming and Outgoing Bytes</label><br /><br />
 						<Line
 							data={this.getChartData([this.state.incomingBytes, this.state.outgoingBytes], ['incoming bytes', 'outgoing bytes'], 'hsla(177, 100%, 25%, 1)', false)}
 							height={200}
-							options={this.getOptions(true, true, "incoming & outgoing bytes")}
+							options={this.getOptions(true, true)}
 						/>
 					</div>
-					<div>
+					<div className='chart-objects'>
+						<label>Objects In The Bucket</label><br />
 						<Pie
 							data={this.getObjects()}
 							height={200}
-							options={this.getOptions(false, false, "objects")}
+							options={this.getOptions(false, false)}
 						/>
 					</div>
 				</div>
 				<div className='row'>
-					<div className='chart'>
+					<div className='chart-storage'>
+					<label>Storage Utilized</label><br /><br />
 						<Line
 							data={this.getChartData([this.state.storageUtilized], ['storage utilized'], 'hsla(328, 81%, 41%, 1)', true)}
 							height={200}
-							options={this.getOptions(false, true, "storage utilized")}
+							options={this.getOptions(false, true)}
 						/>
 					</div>
 					<div className='button'>
+					<	label>Operations</label><br /><br />
 						<input type="button" value="Operations" className="options"/>
 					</div>
 				</div>

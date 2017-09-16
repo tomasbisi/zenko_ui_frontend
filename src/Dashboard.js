@@ -9,7 +9,7 @@ import AWS from 'aws-sdk';
 
 let data1 =
   { "timeRange":[1501570800000,1504249199999],
-    "storageUtilized":[0,5],
+    "storageUtilized":[0,500000],
     "incomingBytes":4,
     "outgoingBytes":8,
     "numberOfObjects":[0,1],
@@ -55,7 +55,7 @@ let data1 =
   };
 let data2 =
   { "timeRange":[1501570800000,1504249199999],
-    "storageUtilized":[0,10],
+    "storageUtilized":[0,1000],
     "incomingBytes":12,
     "outgoingBytes":2,
     "numberOfObjects":[0,1],
@@ -227,25 +227,23 @@ class Dashboard extends Component {
                   <MenuItem eventKey={3.2}>Buchet 2</MenuItem>
                   <MenuItem eventKey={3.3}>Bucket 3</MenuItem>
                   <MenuItem divider />
-                  
+
                 </NavDropdown>
               </Nav>
           </Navbar.Collapse>
           </Navbar>
           </p>
 
-            <DataCall />
-            
 
-        <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/> 
-       
-        
-        
-          
-        
+        <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/>
+
+
+
+
+
 
        </div>
-       
+
     );
   }
 }
