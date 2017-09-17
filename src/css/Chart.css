@@ -28,17 +28,18 @@
 	padding-right: 3em;
 	padding-top: 1em;
 	padding-bottom: 4em;
-	margin: .2em;
+	margin: .3em;
 	background-color: white;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 }
 
-.row > label {
+.title {
 	color: #424242;
-	font: 46px Arial;
-	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	font-size: 17px;
+	font-weight: 400;
 }
 
 .options {

@@ -193,7 +193,7 @@ class Chart extends Component {
 			<div className='grid'>
 				<div className='row'>
 					<div className='chart-bytes'>
-						<label>Incoming and Outgoing Bytes</label><br /><br />
+						<p className='title'>Incoming and Outgoing Bytes</p><br />
 						<Line
 							data={this.getChartData([this.state.incomingBytes, this.state.outgoingBytes], ['incoming bytes', 'outgoing bytes'], 'hsla(177, 100%, 25%, 1)', false)}
 							height={200}
@@ -201,7 +201,7 @@ class Chart extends Component {
 						/>
 					</div>
 					<div className='chart-objects'>
-						<label>Objects In The Bucket</label><br />
+						<p className='title'>Objects In The Bucket</p><br />
 						<Pie
 							data={this.getObjects()}
 							height={200}
@@ -211,7 +211,7 @@ class Chart extends Component {
 				</div>
 				<div className='row'>
 					<div className='chart-storage'>
-					<label>Storage Utilized</label><br /><br />
+					<p className='title'>Storage Utilized</p><br />
 						<Line
 							data={this.getChartData([this.state.storageUtilized], ['storage utilized'], 'hsla(328, 81%, 41%, 1)', true)}
 							height={200}
@@ -219,7 +219,7 @@ class Chart extends Component {
 						/>
 					</div>
 					<div className='button'>
-					<	label>Operations</label><br /><br />
+						<p className='title'>Operations</p><br />
 						<input type="button" value="Operations" className="options"/>
 					</div>
 				</div>
