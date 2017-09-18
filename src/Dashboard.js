@@ -100,7 +100,7 @@ let data2 =
     "bucketName":"utapi-bucket"
   };
 
-// let data_chart = [data1, data2, data1, data1, data2];
+let data_chart = [data1, data2, data1, data1, data2];
 
 let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 231};
 
@@ -127,35 +127,12 @@ class Dashboard extends Component {
     let datacall = new DataCall();
     // datacall.query();
     this.setState({
-      // data: data_chart,
-      data: datacall.getData(),
+      data: data_chart,
+      // data: datacall.getData(),
       // data: DataCall.getData(),
 	  objects: objects
     });
   }
-
-
-    constructor() {
-      super();
-      this.state = {
-        timeRange: {},
-        bucketName: {},
-        data: []
-    }
-  }
-
-	componentWillMount() {
-		this.getData();
-	}
-
-	getData() {
-	// Ajax calls here
-	this.setState({
-		data: data,
-		objects: objects
-	});
-	}
-
 
   handleSubmit(e) {
     if (

@@ -135,8 +135,4 @@ class DataCall extends Component {
 		         }
 
 
-
-
-}
-
 export default DataCall;

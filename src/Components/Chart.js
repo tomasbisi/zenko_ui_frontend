@@ -1,9 +1,9 @@
+import DataCall from '../Datacall';
 import React, { Component } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import Operations from './OperationsTable';
-import ObjectDetails from './ObjectDetailsTable'
+import ObjectDetails from './ObjectDetailsTable';
 import '../css/Chart.css';
-import DataCall from '../Datacall';
 
 class Chart extends Component {
 	constructor(props) {
@@ -21,11 +21,7 @@ class Chart extends Component {
 	}
 
 	componentWillMount() {
-
-		let data = this.state.data;		
-
 		let data = this.state.data;
-
 		this.setState({
 			dates: data.map((i) => {
 				return (this.getDate(i.timeRange[0]) + ' | ' + this.getDate(i.timeRange[1]))}),
@@ -38,12 +34,7 @@ class Chart extends Component {
 			storageUtilized: data.map((i) => {
 				return (i.storageUtilized[1]);
 			})
-
-		})
-		console.log("TESTING DATA" + data);
-
 		});
-
 	}
 
 	static defaultProps = {
