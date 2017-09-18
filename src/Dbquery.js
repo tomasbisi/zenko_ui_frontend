@@ -37,7 +37,10 @@ function query (param, callback) {
                 if (err) {
                 callback(err);
                 } else {
-                    // console.log(result)
+                    console.log("HELLLOOOWOOORODDDLD");
+                    console.log(result.Items);
+                    console.log("HELLLOOOWOOORODDDLD");
+
                     items = items.concat(result.Items);
                     if (result.LastEvaluatedKey) {
                         params.ExclusiveStartKey = result.LastEvaluatedKey;
@@ -49,16 +52,20 @@ function query (param, callback) {
             });
         };
         queryExecute(callback);
+
     }
 
 
  
     var param = {name:"utapi-bucket", start:1501570800000, end:1504249199999};
 
+    // query(param);
+
    query(param, (err, result)=>{
         console.log(err);
-        console.log(result[1]);
-        console.log(result.data);
+        // console.log(result[1]);
+        // console.log(result.data);
+        // console.log(result);
     });
 
 

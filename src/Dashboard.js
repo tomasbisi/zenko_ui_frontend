@@ -100,7 +100,7 @@ let data2 =
     "bucketName":"utapi-bucket"
   };
 
-let data = [data1, data2, data1, data1, data2];
+// let data_chart = [data1, data2, data1, data1, data2];
 
 let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 231};
 
@@ -110,25 +110,28 @@ class Dashboard extends Component {
 
   componentWillMount() {
     this.getData();
+    alert(this.state.data);
   }
 
   getData() {
     // Ajax calls here
+    let datacall = new DataCall();
+    // datacall.query();
     this.setState({
-      data: data,
+      // data: data_chart,
+      data: datacall.getData(),
+      // data: DataCall.getData(),
 	  objects: objects
     });
   }
 
 
-
-
     constructor() {
-    super();
-    this.state = {
-      timeRange: {},
-      bucketName: {},
-      data: []
+      super();
+      this.state = {
+        timeRange: {},
+        bucketName: {},
+        data: []
     }
   }
 
@@ -235,14 +238,10 @@ class Dashboard extends Component {
           </p>
 
             <DataCall />
-            
+        
 
-        <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/> 
-       
-        
-        
-          
-        
+            <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/> 
+      
 
        </div>
        
