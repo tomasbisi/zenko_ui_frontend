@@ -115,26 +115,26 @@ class Dashboard extends Component {
 			data: []
 		}
 	}
-
-
-  componentWillMount() {
-    this.getData();
-    alert(this.state.data);
-    console.log("TEST 2:");
-    console.log(this.state.data);
-  }
-
-  getData() {
-    // Ajax calls here
-    let datacall = new DataCall();
-    // datacall.query();
+  componentWillMount(){
     this.setState({
       data: data_chart,
-      // data: datacall.getData(),
-      // data: DataCall.getData(),
-	  objects: objects
+      objects: objects
     });
   }
+
+/*
+  componentDidMount() {
+    let datacall = new DataCall();
+    datacall.getData().then((outdata) => {
+      console.log(outdata);
+      this.setState({
+        data:outdata
+      });
+      console.log("data");
+      console.log(this.state.data);
+    });
+  }
+  */
 
   handleSubmit(e) {
     if (
