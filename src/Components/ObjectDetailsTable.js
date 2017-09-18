@@ -108,7 +108,7 @@ class ObjectDetails extends Component {
 							)
 						}
 					]}
-					defaultPageSize={3}
+					defaultPageSize={4}
 					className="-striped -highlight"
 					showPageSizeOptions={false}
 				/>
