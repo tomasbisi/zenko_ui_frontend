@@ -10,8 +10,8 @@ import AWS from 'aws-sdk';
 let data1 =
   { "timeRange":[1501570800000,1504249199999],
     "storageUtilized":[0,500000],
-    "incomingBytes":4,
-    "outgoingBytes":8,
+    "incomingBytes":13352332,
+    "outgoingBytes":122342353,
     "numberOfObjects":[0,1],
     "operations":
     {
@@ -56,8 +56,8 @@ let data1 =
 let data2 =
   { "timeRange":[1501570800000,1504249199999],
     "storageUtilized":[0,1000],
-    "incomingBytes":12,
-    "outgoingBytes":2,
+    "incomingBytes":213133334,
+    "outgoingBytes":224345668,
     "numberOfObjects":[0,1],
     "operations":
     {
@@ -107,30 +107,30 @@ let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 23
 
 class Dashboard extends Component {
 
+	constructor() {
+		super();
+		this.state = {
+			timeRange: {},
+			bucketName: {},
+			data: []
+		}
+	}
 
-  componentWillMount() {
-    this.getData();
-  }
+	componentWillMount() {
+		this.getData();
+	}
 
-  getData() {
-    // Ajax calls here
-    this.setState({
-      data: data,
-	  objects: objects
-    });
-  }
-
-
+	getData() {
+	// Ajax calls here
+	this.setState({
+		data: data,
+		objects: objects
+	});
+	}
 
 
-    constructor() {
-    super();
-    this.state = {
-      timeRange: {},
-      bucketName: {},
-      data: []
-    }
-  }
+
+
 
   handleSubmit(e) {
     if (

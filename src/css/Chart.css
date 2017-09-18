@@ -37,7 +37,7 @@
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
-	box-shadow: 2px 1px 5px #888;
+	box-shadow: 1px 1px 5px #bcbcbc;
 }
 
 .title {
@@ -61,4 +61,13 @@
 
 .button {
 	flex: 1;
+}
+
+.objects-header {
+	display: flex;
+	flex-direction: row;
+}
+
+.objects-header > input[type='button'] {
+	margin-left: auto;
 }
