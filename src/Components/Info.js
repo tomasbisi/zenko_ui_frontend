@@ -114,7 +114,7 @@ class Info extends Component {
 	}
 
 	componentDidMount(){
-		document.body.style.backgroundColor = "#eee"// Set the style
+		document.body.style.backgroundColor = "#f9f9f9"// Set the style
 	}
 
 	getData() {

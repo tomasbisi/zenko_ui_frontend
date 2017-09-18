@@ -3,7 +3,7 @@ import AWS from 'aws-sdk';
 import Chart from './Components/Chart'
 
 AWS.config.update({
-    accessKeyId: "accessKey1", 
+    accessKeyId: "accessKey1",
     secretAccessKey: "verySecretKey1",
     region: "us-west-2",
     endpoint: "http://localhost:8000"
@@ -32,6 +32,7 @@ class DataCall extends Component {
 		super();
 		this.state = {
 			title: "Bucket 1",
+
 			data: [],
 		};
 
@@ -115,15 +116,26 @@ class DataCall extends Component {
 	   }
 
 		 render() {
-		 	
+
 		         	return (
 		         		<div>
+
 		         			<h1>{this.query.bind(this)}</h1>			         			
 		         			
+
+		         			<h1>{this.state.title}</h1>
+
+
 		         		</div>
-		         		
+
 		         		);
+
 		         }   
+
+		         }
+
+
+
 
 }
 

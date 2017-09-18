@@ -9,9 +9,9 @@ import AWS from 'aws-sdk';
 
 let data1 =
   { "timeRange":[1501570800000,1504249199999],
-    "storageUtilized":[0,5],
-    "incomingBytes":4,
-    "outgoingBytes":8,
+    "storageUtilized":[0,500000],
+    "incomingBytes":13352332,
+    "outgoingBytes":122342353,
     "numberOfObjects":[0,1],
     "operations":
     {
@@ -55,9 +55,9 @@ let data1 =
   };
 let data2 =
   { "timeRange":[1501570800000,1504249199999],
-    "storageUtilized":[0,10],
-    "incomingBytes":12,
-    "outgoingBytes":2,
+    "storageUtilized":[0,1000],
+    "incomingBytes":213133334,
+    "outgoingBytes":224345668,
     "numberOfObjects":[0,1],
     "operations":
     {
@@ -107,6 +107,15 @@ let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 23
 
 class Dashboard extends Component {
 
+	constructor() {
+		super();
+		this.state = {
+			timeRange: {},
+			bucketName: {},
+			data: []
+		}
+	}
+
 
   componentWillMount() {
     this.getData();
@@ -134,6 +143,19 @@ class Dashboard extends Component {
         data: []
     }
   }
+
+	componentWillMount() {
+		this.getData();
+	}
+
+	getData() {
+	// Ajax calls here
+	this.setState({
+		data: data,
+		objects: objects
+	});
+	}
+
 
   handleSubmit(e) {
     if (
@@ -230,21 +252,20 @@ class Dashboard extends Component {
                   <MenuItem eventKey={3.2}>Buchet 2</MenuItem>
                   <MenuItem eventKey={3.3}>Bucket 3</MenuItem>
                   <MenuItem divider />
-                  
+
                 </NavDropdown>
               </Nav>
           </Navbar.Collapse>
           </Navbar>
           </p>
 
-            <DataCall />
-        
+    
 
             <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/> 
       
 
        </div>
-       
+
     );
   }
 }
