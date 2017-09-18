@@ -120,6 +120,8 @@ class Dashboard extends Component {
   componentWillMount() {
     this.getData();
     alert(this.state.data);
+    console.log("TEST 2:");
+    console.log(this.state.data);
   }
 
   getData() {

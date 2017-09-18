@@ -32,18 +32,19 @@ class DataCall extends Component {
 		super();
 		this.state = {
 			title: "Bucket 1",
-
 			data: [],
 		};
 
-		this.query(param1, (err, result) => {
-			console.log(err);
-			// let tmp = JSON.parse(result[0]);
-			
-			// this.data = result;
-			// console.log("THis is the DATA"  + this.data);
-			console.log("THis is the DATA"  + result);
-		});
+		// this.query(param1, (err, items) => {
+		// 	let out = [];
+		// 	console.log("Error: " + err);
+		// 	// console.log(items);
+		// 	for (let i = 0; i < items.length; i++){
+		// 		out.push(items[i].data);
+		// 	}
+		// 	console.log(out);
+		// 	//console.log("THis is the DATA"  + items);
+		// });
 		
 	}
 
@@ -84,7 +85,7 @@ class DataCall extends Component {
 	                    }
 	                }
 
-	                // this.setState({ data: result.Items });			
+	                // this.setState({ data: result.Items });	
 	            });
 
 	            	
@@ -110,7 +111,21 @@ class DataCall extends Component {
     }
 
     getData() {
-	   	return (this.state.data);
+    	console.log("TESTINS GETDATA");
+    	this.query(param1, (err, items) => {
+			let out = [];
+			console.log("Error: " + err);
+			// console.log(items);
+			for (let i = 0; i < items.length; i++){
+				out.push(items[i].data);
+			}
+			console.log(out);
+			this.data = out;
+			// return (out);
+			//console.log("THis is the DATA"  + items);
+		});
+	   	// 
+
 	   	// return (this.data);
 
 	   }
