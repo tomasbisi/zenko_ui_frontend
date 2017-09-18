@@ -9,6 +9,7 @@ class ObjectDetails extends Component {
 		this.sum = 0;
 		this.state = {
 			objects: props.objects,
+			objectsData: []
 		}
 	}
 
@@ -34,18 +35,14 @@ class ObjectDetails extends Component {
 			};
 			obj.push(elem);
 		}
+		this.setState({
+			objectsData: obj
+		});
 		return (obj);
 	}
 
 	getPercentage(value) {
 		return ((value * 100) / this.sum);
-	}
-
-	getColor(value) {
-		return (value > 66 ? '#ff2e00'
-			: value > 33 ? '#ffbf00'
-			: '#85cc00'
-		);
 	}
 
 	convertValue(value) {
@@ -90,7 +87,7 @@ class ObjectDetails extends Component {
 								<div style = {{
 									width: `${row.value}%`,
 									height: '100%',
-									backgroundColor: this.getColor(row.value),
+									backgroundColor: '#85cc00',
 									borderRadius: '2px',
 									transition: 'all .2s ease-out'
 								}} />
@@ -108,9 +105,11 @@ class ObjectDetails extends Component {
 							)
 						}
 					]}
-					defaultPageSize={4}
+					defaultPageSize={ this.state.objectsData.length }
 					className="-striped -highlight"
 					showPageSizeOptions={false}
+					showPaginationBottom={false}
+					style={{ height: '200px' }}
 				/>
 			</div>
 		)

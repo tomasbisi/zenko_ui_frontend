@@ -1,7 +1,7 @@
 .grid {
 	width: calc(100% - 4em);
 	/*width: 100%;*/
-	height: 150em;
+	height: 47em;
 	margin-right: auto;
     margin-left: auto;
 }
@@ -16,6 +16,7 @@
 	.grid {
 		width: calc(200% - 6em);
 		margin-left: 2em;
+		height: 90em;
 	}
 
 	.row {
