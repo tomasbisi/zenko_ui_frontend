@@ -107,6 +107,7 @@ let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 23
 
 class Dashboard extends Component {
 
+
 	constructor() {
 		super();
 		this.state = {
@@ -118,23 +119,27 @@ class Dashboard extends Component {
 
 
   componentWillMount() {
-    this.getData();
-    alert(this.state.data);
-    console.log("TEST 2:");
-    console.log(this.state.data);
-  }
-
-  getData() {
-    // Ajax calls here
-    let datacall = new DataCall();
-    // datacall.query();
+    // this.getData();
+    // alert(this.state.data);
+    // console.log("TEST 2:");
+    // console.log(this.state.data);
     this.setState({
       data: data_chart,
-      // data: datacall.getData(),
-      // data: DataCall.getData(),
-	  objects: objects
+      objects: objects
     });
   }
+
+  // getData() {
+  //   // Ajax calls here
+  //   let datacall = new DataCall();
+  
+  //   // datacall.query();
+  //   this.setState({
+  //     data: data_chart,
+  //     data: datacall.getData(),
+	 //  objects: objects
+  //   });
+  // }
 
   handleSubmit(e) {
     if (
