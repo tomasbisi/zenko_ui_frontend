@@ -7,6 +7,7 @@ import DataCall from './Datacall';
 import AWS from 'aws-sdk';
 
 
+
 let data1 =
   { "timeRange":[1501570800000,1504249199999],
     "storageUtilized":[0,500000],
@@ -129,6 +130,8 @@ class Dashboard extends Component {
     });
   }
 
+
+
   // getData() {
   //   // Ajax calls here
   //   let datacall = new DataCall();
@@ -153,20 +156,33 @@ class Dashboard extends Component {
         startDate: this.refs.startDate.value,
         startTime: this.refs.startTime.value,
         endDate: this.refs.endDate.value,
-        endTime: this.refs.endTime.value
+        endTime: this.refs.endTime.value,
+        
       }}, function() {
+       
+        return fetch('https://localhost:8200/api', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              timeRange: this.state.timeRange
+            })                        
+        });
         console.log(this.state.timeRange);
 
         // send credentials to back end
 
         // if all works out go to bucketinfo page
         // otherwise error message has to be generated
-        this.props.history.push("/graphs");
+        // this.props.history.push("/graphs");
       });
     }
   e.preventDefault();
   }
 
+  
   handleChange(e) {
 
     this.setState({bucketName: {
@@ -207,7 +223,7 @@ class Dashboard extends Component {
                               <div className="BucketInfo">
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                 <div>
-                                  <br />
+                                  <br />                                    
                                     <label style={{color:'black'}}>Start Date & Time</label><br />
                                     <input style={{margin:'5px'}} type="date" ref="startDate" />
                                     <input type="time" ref="startTime" />

@@ -20,6 +20,8 @@ class Operations extends Component {
 	getOperations() {
 		let list = this.state.data[this.state.data.length - 1].operations;
 		let operations = [];
+		console.log("operations!!!!!!!!!!");
+		console.log(operations);
 		// let title = ['Delete Bucket', DeleteBucketCors]
 		for (let key in list) {
 			let elem = {
