@@ -14,7 +14,9 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 const dbName = "testdb";
 
-var param1 = {name:"utapi-bucket", start:1505570800000, end:1505849199999};
+var param_default = {name:"utapi-bucket", start:1505570800000, end:1506549199999};
+
+
 
 
 class DataCall extends Component {
@@ -67,13 +69,26 @@ class DataCall extends Component {
         });
 	 }
 
-	 getData() {
+	getData(param) {
 		 return new Promise((resolve, reject) => {
-			 this.query(param1).then((out) => {
+			 this.query(param_default).then((out) => {
 				 resolve(out);
 				});
 			});
 		}
+
+	requestData(param) {  
+      fetch('https://localhost:8200/api', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              timeRange: this.query(param)
+            })                        
+        }); 
+  	}
 	 
 	// query (param, callback) {
 	//         console.log("query");
