@@ -43,10 +43,11 @@ class Chart extends Component {
         }, () => {console.log(this.state)});
     }
 
-	hadleReset() {
-		let data = this.props.data;
+	// TODO: put a comparision function between prop vs. nextProp
+	componentWillReceiveProps(nextProp) {
+		let data = nextProp.data;
 		this.setState({
-			data: this.props.data,
+			data: nextProp.data,
             dates: data.map((i) => {
                 return (this.getDate(i.timeRange[0]) + ' | ' + this.getDate(i.timeRange[1]))
             }),
@@ -274,8 +275,6 @@ class Chart extends Component {
 
 	render() {
 		let active = this.state.active;
-		console.log('here', this.props.data);
-		this.hadleReset();
 		return (
 			<div className='grid'>
 				<div className='row'>
