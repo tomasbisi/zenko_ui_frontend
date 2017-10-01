@@ -5,104 +5,6 @@ import Operations from './OperationsTable';
 import ObjectDetails from './ObjectDetailsTable';
 import '../css/Chart.css';
 
-let data1 =
-  { "timeRange":[1501570800000,1504249199999],
-    "storageUtilized":[0,500000],
-    "incomingBytes":13352332,
-    "outgoingBytes":122342353,
-    "numberOfObjects":[0,1],
-    "operations":
-    {
-      "s3:DeleteBucket":0,
-      "s3:DeleteBucketCors":0,
-      "s3:DeleteBucketWebsite":0,
-      "s3:DeleteObjectTagging":0,
-      "s3:ListBucket":0,
-      "s3:GetBucketAcl":0,
-      "s3:GetBucketCors":0,
-      "s3:GetBucketWebsite":0,
-      "s3:GetBucketLocation":0,
-      "s3:CreateBucket":1,
-      "s3:PutBucketAcl":0,
-      "s3:PutBucketCors":0,
-      "s3:PutBucketWebsite":0,
-      "s3:PutObject":1,
-      "s3:CopyObject":0,
-      "s3:UploadPart":0,
-      "s3:ListBucketMultipartUploads":0,
-      "s3:ListMultipartUploadParts":0,
-      "s3:InitiateMultipartUpload":0,
-      "s3:CompleteMultipartUpload":0,
-      "s3:AbortMultipartUpload":0,
-      "s3:DeleteObject":0,
-      "s3:MultiObjectDelete":0,
-      "s3:GetObject":0,
-      "s3:GetObjectAcl":0,
-      "s3:GetObjectTagging":0,
-      "s3:PutObjectAcl":0,
-      "s3:PutObjectTagging":0,
-      "s3:HeadBucket":0,
-      "s3:HeadObject":0,
-      "s3:PutBucketVersioning":0,
-      "s3:GetBucketVersioning":0,
-      "s3:PutBucketReplication":0,
-      "s3:GetBucketReplication":0,
-      "s3:DeleteBucketReplication":0
-    },
-    "bucketName":"utapi-bucket"
-  };
-let data2 =
-  { "timeRange":[1501570800000,1504249199999],
-    "storageUtilized":[0,1000],
-    "incomingBytes":213133334,
-    "outgoingBytes":224345668,
-    "numberOfObjects":[0,1],
-    "operations":
-    {
-      "s3:DeleteBucket":0,
-      "s3:DeleteBucketCors":0,
-      "s3:DeleteBucketWebsite":0,
-      "s3:DeleteObjectTagging":0,
-      "s3:ListBucket":0,
-      "s3:GetBucketAcl":0,
-      "s3:GetBucketCors":0,
-      "s3:GetBucketWebsite":0,
-      "s3:GetBucketLocation":0,
-      "s3:CreateBucket":1,
-      "s3:PutBucketAcl":0,
-      "s3:PutBucketCors":0,
-      "s3:PutBucketWebsite":0,
-      "s3:PutObject":1,
-      "s3:CopyObject":0,
-      "s3:UploadPart":0,
-      "s3:ListBucketMultipartUploads":0,
-      "s3:ListMultipartUploadParts":0,
-      "s3:InitiateMultipartUpload":0,
-      "s3:CompleteMultipartUpload":0,
-      "s3:AbortMultipartUpload":0,
-      "s3:DeleteObject":0,
-      "s3:MultiObjectDelete":0,
-      "s3:GetObject":0,
-      "s3:GetObjectAcl":0,
-      "s3:GetObjectTagging":0,
-      "s3:PutObjectAcl":0,
-      "s3:PutObjectTagging":0,
-      "s3:HeadBucket":0,
-      "s3:HeadObject":0,
-      "s3:PutBucketVersioning":0,
-      "s3:GetBucketVersioning":0,
-      "s3:PutBucketReplication":0,
-      "s3:GetBucketReplication":0,
-      "s3:DeleteBucketReplication":0
-    },
-    "bucketName":"utapi-bucket"
-  };
-
-let data_chart = [data1, data2, data1, data1, data2];
-
-let objects = {'A':1000, 'B':2000, 'C':4000, 'D':100, 'E':700, 'F': 560, 'G': 231};
-
-
 class Chart extends Component {
 	constructor(props) {
 		super(props);
@@ -114,15 +16,18 @@ class Chart extends Component {
 			incomingBytes: [],
 			outgoingBytes: [],
 			storageUtilized: [],
-			active: false
+			active: false,
+			refresh: true
 		}
 	}
 
 	componentWillMount() {
-        let data = data_chart;
+        let data = this.state.data;
+        // let data = data_chart;
         console.log("inital data");
         console.log(data);
         this.setState({
+			data: this.props.data,
             dates: data.map((i) => {
                 return (this.getDate(i.timeRange[0]) + ' | ' + this.getDate(i.timeRange[1]))
             }),
@@ -135,13 +40,33 @@ class Chart extends Component {
             storageUtilized: data.map((i) => {
                 return (i.storageUtilized[1]);
             })
-        });
+        }, () => {console.log(this.state)});
     }
 
+	hadleReset() {
+		let data = this.props.data;
+		this.setState({
+			data: this.props.data,
+            dates: data.map((i) => {
+                return (this.getDate(i.timeRange[0]) + ' | ' + this.getDate(i.timeRange[1]))
+            }),
+            incomingBytes: data.map((i) => {
+                return (i.incomingBytes);
+            }),
+            outgoingBytes: data.map((i) => {
+                return (i.outgoingBytes);
+            }),
+            storageUtilized: data.map((i) => {
+                return (i.storageUtilized[1]);
+            })
+        }, () => {console.log(this.state)});
+	}
+
+	/*
     componentDidMount() {
     	// let dashboard = new Dashboard();
         let datacall = new DataCall();
-        let param = new Object();
+        let param = {};
         param.name = "utapi-bucket";
         datacall.requestData(param).then((data) => {
             console.log("final data");
@@ -161,7 +86,8 @@ class Chart extends Component {
                 })
             });
         });
-  }
+		***/
+  // }
 
 	// componentWillMount() {
 	// 	// let data = this.state.data;
@@ -182,6 +108,7 @@ class Chart extends Component {
 
 
 	static defaultProps = {
+		data: [],
 		textColor: '#00000',
 		gridColor: '#00000'
 	}
@@ -347,7 +274,8 @@ class Chart extends Component {
 
 	render() {
 		let active = this.state.active;
-
+		console.log('here', this.props.data);
+		this.hadleReset();
 		return (
 			<div className='grid'>
 				<div className='row'>
@@ -363,7 +291,7 @@ class Chart extends Component {
 						<div className='objects-header'>
 							<p className='title'>Objects In The Bucket</p>
 							<input type='button' value='Details' onClick={this.handleClick.bind(this)}/>
-						</div>	
+						</div>
 						{active ? (
 							<ObjectDetails objects={this.state.objects} />
 						) : (
@@ -386,7 +314,6 @@ class Chart extends Component {
 					</div>
 					<div className='button'>
 						<p className='title'>Operations</p>
-						<Operations data={this.state.data} />
 					</div>
 				</div>
 			</div>
@@ -396,4 +323,4 @@ class Chart extends Component {
 
 export default Chart;
 
-// <input type="button" value="Operations" className="options"/>
+// <Operations data={this.state.data} />
