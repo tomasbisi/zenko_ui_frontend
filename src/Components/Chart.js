@@ -23,9 +23,6 @@ class Chart extends Component {
 
 	componentWillMount() {
         let data = this.state.data;
-        // let data = data_chart;
-        console.log("inital data");
-        console.log(data);
         this.setState({
 			data: this.props.data,
             dates: data.map((i) => {
@@ -109,7 +106,6 @@ class Chart extends Component {
 
 
 	static defaultProps = {
-		data: [],
 		textColor: '#00000',
 		gridColor: '#00000'
 	}
