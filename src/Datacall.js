@@ -6,7 +6,7 @@ AWS.config.update({
     accessKeyId: "accessKey1",
     secretAccessKey: "verySecretKey1",
     region: "us-west-2",
-    endpoint: "http://localhost:8000"
+    endpoint: "http://localhost:8300"
 });
 
 // const dynamodb = new AWS.DynamoDB();
@@ -15,8 +15,6 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const dbName = "testdb";
 
 var param_default = {name:"utapi-bucket", start:1505570800000, end:1506549199999};
-
-
 
 
 class DataCall extends Component {
@@ -33,6 +31,7 @@ class DataCall extends Component {
 		};		
 	}
 
+/*
 	query (param) {
         return new Promise((resolve, reject) => {
             var params = {
@@ -76,16 +75,17 @@ class DataCall extends Component {
 				});
 			});
 		}
+		*/
 
 	requestData(param) {  
-      fetch('https://localhost:8200/api', {
-            method: 'POST',
+      return fetch('http://localhost:8200/api', {
+            method: 'PUT',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              timeRange: this.query(param)
+              timeRange: param
             })                        
         }); 
   	}

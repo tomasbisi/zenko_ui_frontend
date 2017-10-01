@@ -144,52 +144,50 @@ class Dashboard extends Component {
   //   });
   // }
 
-
   handleSubmit(e) {
     return new Promise((resolve, reject) => {
-            if (
-              this.refs.startDate.value === '' ||
-              this.refs.startTime.value === '' ||
-              this.refs.endDate.value === '' ||
-              this.refs.endTime.value === '') {
-              alert('Please fill out all fields!');
-            } else {
-              let startParam = [];
-              let endParam = [];
-              this.setState({timeRange: {
-                startDate: this.refs.startDate.value,
-                startTime: this.refs.startTime.value,
-                endDate: this.refs.endDate.value,
-                endTime: this.refs.endTime.value,
-                epochStart: startParam.push(new Date(this.refs.startDate.value + 'T' + this.refs.startTime.value).getTime()),
-                epochEnd: endParam.push(new Date(this.refs.endDate.value + 'T' + this.refs.endTime.value).getTime()),
-                name: "utapi-bucket1",
-                accesKey: "accessKey1",
-                secretKey: "verySecretKey1",
-                level: "bucket",
-                interval: "15min"
-              }}, function() {
-               
-                return fetch('https://localhost:8200/api', {
-                    method: 'POST',
-                    headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      timeRange: this.state.timeRange
-                    })                        
-                }); 
-          });
-          resolve(this.state.timeRange);
-          
-          console.log("TEST1!!!");
-          console.log(this.state.timeRange);
-          console.log("TEST2!!!");
-            // console.log(this.state.timeRange.epochStart);
-          console.log(startParam);
-        }
-
+      if (
+        this.refs.startDate.value === '' ||
+        this.refs.startTime.value === '' ||
+        this.refs.endDate.value === '' ||
+        this.refs.endTime.value === '') 
+      {
+        alert('Please fill out all fields!');
+      } else {
+        let startParam = [];
+        let endParam = [];
+        this.setState({
+          timeRange: {
+            startDate: this.refs.startDate.value,
+            startTime: this.refs.startTime.value,
+            endDate: this.refs.endDate.value,
+            endTime: this.refs.endTime.value,
+            epochStart: new Date(this.refs.startDate.value + 'T' + this.refs.startTime.value).getTime(),
+            epochEnd: new Date(this.refs.endDate.value + 'T' + this.refs.endTime.value).getTime(),
+            name: "utapi-bucket1",
+            accesKey: "accessKey1",
+            secretKey: "verySecretKey1",
+            level: "bucket",
+            interval: "15min"
+          }
+        }, (prevState, props) => {
+          fetch('http://localhost:8200/api', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              timeRange: this.state.timeRange
+            })
+          })
+            .then((response) => (response.json()))
+            .then((out) => console.log(out));
+        });
+        resolve(this.state.timeRange);
+        console.log(this.state.timeRange);
+        //console.log(this.state.data);
+      }
       e.preventDefault();
     });
   }
