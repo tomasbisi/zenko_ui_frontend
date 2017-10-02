@@ -5,7 +5,7 @@ FROM node:6.11.3
 # Install and configure `serve`.
 RUN npm install -g serve
 CMD serve -s build
-EXPOSE 3000
+EXPOSE 5000
 
 # Install all dependencies of the current project.
 COPY package.json package.json
