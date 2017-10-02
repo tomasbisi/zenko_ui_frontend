@@ -1,17 +1,18 @@
-FROM node:boron
+# You should always specify a full version here to ensure all of your developers
+# are running the same version of Node.
+FROM node:6.11.3
 
-# Create app directory
-WORKDIR /usr/src/app
+# Install and configure `serve`.
+RUN npm install -g serve
+CMD serve -s build
+EXPOSE 3000
 
-# Install app dependencies
-COPY package.json .
-# For npm@5 or later, copy package-lock.json as well
-# COPY package.json package-lock.json ./
-
+# Install all dependencies of the current project.
+COPY package.json package.json
 RUN npm install
 
-# Bundle app source
+# Copy all local files into the image.
 COPY . .
 
-EXPOSE 3000
-CMD [ "npm", "start" ]
+# Build for production.
+RUN npm run build --production
