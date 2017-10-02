@@ -143,8 +143,8 @@ class Chart extends Component {
         let datacall = new DataCall();
         let param = new Object();
         param.name = "utapi-bucket";
-        param.start = datacall.getData(this.refs.timeRange);
-        param.end = datacall.getData(this.refs.timeRange);
+        param.start = datacall.getData(this.state.startParam);
+        param.end = datacall.getData(this.state.endParam);
         console.log("EPOCHS");
         console.log(param.start);
         console.log(param.end);

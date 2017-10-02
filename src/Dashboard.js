@@ -114,7 +114,7 @@ class Dashboard extends Component {
 		this.state = {
 			timeRange: {},
 			bucketName: {},
-			data: []
+			data: [],
 		}
 	}
 
@@ -154,15 +154,15 @@ class Dashboard extends Component {
               this.refs.endTime.value === '') {
               alert('Please fill out all fields!');
             } else {
-              let startParam = [];
-              let endParam = [];
+              this.state.startParam = [];
+              this.state.endParam = [];
               this.setState({timeRange: {
                 startDate: this.refs.startDate.value,
                 startTime: this.refs.startTime.value,
                 endDate: this.refs.endDate.value,
                 endTime: this.refs.endTime.value,
-                epochStart: startParam.push(new Date(this.refs.startDate.value + 'T' + this.refs.startTime.value).getTime()),
-                epochEnd: endParam.push(new Date(this.refs.endDate.value + 'T' + this.refs.endTime.value).getTime()),
+                epochStart: this.state.startParam.push(new Date(this.refs.startDate.value + 'T' + this.refs.startTime.value).getTime()),
+                epochEnd: this.state.endParam.push(new Date(this.refs.endDate.value + 'T' + this.refs.endTime.value).getTime()),
                 name: "utapi-bucket1",
                 accesKey: "accessKey1",
                 secretKey: "verySecretKey1",
@@ -170,16 +170,23 @@ class Dashboard extends Component {
                 interval: "15min"
               }}, function() {
                
-                return fetch('https://localhost:8200/api', {
-                    method: 'POST',
-                    headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      timeRange: this.state.timeRange
-                    })                        
-                }); 
+
+                      fetch('http://localhost:8200/api', {  
+                            method: 'post',
+                            mode: 'no-cors',
+                            headers: {  
+                              "Content-type": 'application/josn'
+                            },  
+                            body: JSON.stringify({
+                              timeRange: this.state.timeRange
+                             })                        
+                          })                    
+                          .then(function (data) {  
+                            console.log('Request succeeded with JSON response', data);  
+                          })  
+                          .catch(function (error) {  
+                            console.log('Request failed', error);  
+                          });
           });
           resolve(this.state.timeRange);
           
@@ -187,7 +194,7 @@ class Dashboard extends Component {
           console.log(this.state.timeRange);
           console.log("TEST2!!!");
             // console.log(this.state.timeRange.epochStart);
-          console.log(startParam);
+          console.log(this.state.startParam);
         }
 
       e.preventDefault();
