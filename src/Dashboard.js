@@ -114,8 +114,7 @@ class Dashboard extends Component {
 		this.state = {
 			timeRange: {},
 			bucketName: {},
-			data: [],
-			reload: false
+			data: []
 		}
 	}
 
