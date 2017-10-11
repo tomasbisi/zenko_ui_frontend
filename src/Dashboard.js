@@ -171,7 +171,7 @@ handleSubmit(e) {
 					interval: "15min"
 				}
 			}, (prevState, props) => {
-				fetch('http://localhost:8200/api', {
+				fetch('http://backend:8200/api', {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json',

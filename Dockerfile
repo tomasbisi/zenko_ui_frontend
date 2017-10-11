@@ -2,6 +2,9 @@
 # are running the same version of Node.
 FROM node:6.11.3
 
+# The base node image sets a very verbose log level.
+ENV NPM_CONFIG_LOGLEVEL warn
+
 # Install and configure `serve`.
 RUN npm install -g serve
 CMD serve -s build
