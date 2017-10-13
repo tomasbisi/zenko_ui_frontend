@@ -5,7 +5,6 @@ import App from './App';
 import Dashboard from './Dashboard';
 import Login from './Login'
 import Info from './Components/Info'
-import Datacall from './Datacall'
 
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';

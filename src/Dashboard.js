@@ -1,9 +1,8 @@
-import React, { Component, Datacall } from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Popover, Tooltip, OverlayTrigger, Button, Modal} from 'react-bootstrap';
 import './Dashboard.css';
 import Chart from './Components/Chart'
-import DataCall from './Datacall';
 import AWS from 'aws-sdk';
 
 
@@ -129,20 +128,6 @@ class Dashboard extends Component {
       objects: objects
     });
   }
-
-
-
-  // getData() {
-  //   // Ajax calls here
-  //   let datacall = new DataCall();
-
-  //   // datacall.query();
-  //   this.setState({
-  //     data: data_chart,
-  //     data: datacall.getData(),
-	 //  objects: objects
-  //   });
-  // }
 
 handleSubmit(e) {
 	return new Promise((resolve, reject) => {
