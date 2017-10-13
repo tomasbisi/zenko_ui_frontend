@@ -127,7 +127,6 @@ class Dashboard extends Component {
     });
   }
 
-<<<<<<< HEAD
   handleSubmitTimeRange(e) {
 	  return new Promise((resolve, reject) => {
 		  if (
@@ -181,7 +180,6 @@ class Dashboard extends Component {
   handleSubmitBucketName(e) {
 	  this.setState({ showBucketName: false});
   }
-=======
 handleSubmit(e) {
 	return new Promise((resolve, reject) => {
 		if (
