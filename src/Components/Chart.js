@@ -1,4 +1,3 @@
-import DataCall from '../Datacall';
 import React, { Component } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import Operations from './OperationsTable';
