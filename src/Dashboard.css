@@ -3,3 +3,19 @@
 	width: 100%;
 	background-color: #f9f9f9;
 }
+
+.header {
+	background-color: #1aaff4;
+	padding: 1em;
+	/*padding-bottom: 1em;*/
+	display: flex;
+	flex-direction: row;
+}
+
+.header > Button {
+	color: white;
+}
+
+.header > #Sentry {
+	margin-right: auto;
+}

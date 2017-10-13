@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import Operations from './OperationsTable';
 import ObjectDetails from './ObjectDetailsTable';
+import { Button } from 'react-bootstrap';
+
 import '../css/Chart.css';
 
 class Chart extends Component {
@@ -291,7 +293,7 @@ class Chart extends Component {
 					<div className='chart-objects'>
 						<div className='objects-header'>
 							<p className='title'>Objects In The Bucket</p>
-							<input type='button' value='Details' onClick={this.handleClick.bind(this)}/>
+							<Button type='button' bsStyle="link" onClick={this.handleClick.bind(this)}>Details...</Button>
 						</div>
 						{active ? (
 							<ObjectDetails objects={this.state.objects} />

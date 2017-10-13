@@ -69,6 +69,6 @@
 	flex-direction: row;
 }
 
-.objects-header > input[type='button'] {
+.objects-header > Button {
 	margin-left: auto;
 }

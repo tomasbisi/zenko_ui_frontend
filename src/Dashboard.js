@@ -1,6 +1,6 @@
 import React, { Component, Datacall } from 'react';
 import logo from './logo.svg';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Popover, Tooltip, OverlayTrigger, Button, Modal} from 'react-bootstrap';
+import { Button, Modal} from 'react-bootstrap';
 import './Dashboard.css';
 import Chart from './Components/Chart'
 import DataCall from './Datacall';
@@ -114,83 +114,73 @@ class Dashboard extends Component {
 		this.state = {
 			timeRange: {},
 			bucketName: {},
-			data: []
+			data: [],
+			showTimeRange: false,
+			showBucketName: false
 		}
 	}
 
 
   componentWillMount() {
-    // this.getData();
-    // alert(this.state.data);
-    // console.log("TEST 2:");
-    // console.log(this.state.data);
     this.setState({
       data:data_chart,
       objects: objects
     });
   }
 
+  handleSubmitTimeRange(e) {
+	  return new Promise((resolve, reject) => {
+		  if (
+			  this.refs.startDate.value === '' ||
+			  this.refs.startTime.value === '' ||
+			  this.refs.endDate.value === '' ||
+			  this.refs.endTime.value === '')
+			  {
+				  reject('Please fill out all fields!');
+			  } else {
+				  let startParam = [];
+				  let endParam = [];
+				  this.setState({
+				  timeRange: {
+					  startDate: this.refs.startDate.value,
+					  startTime: this.refs.startTime.value,
+					  endDate: this.refs.endDate.value,
+					  endTime: this.refs.endTime.value,
+					  epochStart: new Date(this.refs.startDate.value + 'T' + this.refs.startTime.value).getTime(),
+					  epochEnd: new Date(this.refs.endDate.value + 'T' + this.refs.endTime.value).getTime(),
+					  name: "utapi-bucket1",
+					  accesKey: "accessKey1",
+					  secretKey: "verySecretKey1",
+					  level: "bucket",
+					  interval: "15min"
+				  }
+			  }, (prevState, props) => {
+				  fetch('http://backend:8200/api', {
+					  method: 'POST',
+					  headers: {
+						  'Accept': 'application/json',
+						  'Content-Type': 'application/json',
+					  },
+					  body: JSON.stringify({
+						  timeRange: this.state.timeRange
+					  })
+				  })
+				  .then((response) => (response.json()))
+				  .then((out) => this.setState({ data: out }))
+				  .then(() => console.log(this.state.data))
+			  });
+			  resolve(this.state.data);
+		  }
+		  e.preventDefault();
+		  this.setState({ showTimeRange: false});
+	  });
+  }
 
 
-  // getData() {
-  //   // Ajax calls here
-  //   let datacall = new DataCall();
-
-  //   // datacall.query();
-  //   this.setState({
-  //     data: data_chart,
-  //     data: datacall.getData(),
-	 //  objects: objects
-  //   });
-  // }
-
-handleSubmit(e) {
-	return new Promise((resolve, reject) => {
-		if (
-			this.refs.startDate.value === '' ||
-			this.refs.startTime.value === '' ||
-			this.refs.endDate.value === '' ||
-			this.refs.endTime.value === '')
-			{
-				reject('Please fill out all fields!');
-			} else {
-				let startParam = [];
-				let endParam = [];
-				this.setState({
-				timeRange: {
-					startDate: this.refs.startDate.value,
-					startTime: this.refs.startTime.value,
-					endDate: this.refs.endDate.value,
-					endTime: this.refs.endTime.value,
-					epochStart: new Date(this.refs.startDate.value + 'T' + this.refs.startTime.value).getTime(),
-					epochEnd: new Date(this.refs.endDate.value + 'T' + this.refs.endTime.value).getTime(),
-					name: "utapi-bucket1",
-					accesKey: "accessKey1",
-					secretKey: "verySecretKey1",
-					level: "bucket",
-					interval: "15min"
-				}
-			}, (prevState, props) => {
-				fetch('http://backend:8200/api', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						timeRange: this.state.timeRange
-					})
-				})
-				.then((response) => (response.json()))
-				.then((out) => this.setState({ data: out }))
-				.then(() => console.log(this.state.data))
-			});
-			resolve(this.state.data);
-		}
-		e.preventDefault();
-		this.setState({ show: false});
-	});
-}
+	// TODO: Change bucket Name
+  handleSubmitBucketName(e) {
+	  this.setState({ showBucketName: false});
+  }
 
 
   handleChange(e) {
@@ -203,74 +193,69 @@ handleSubmit(e) {
     e.preventDefault();
   }
 
+  openTimeRangeWindow(e) {
+	  this.setState({ showTimeRange: true });
+  }
+
+  openBucketNameWindow(e) {
+	  this.setState({ showBucketName: true });
+  }
+
   render() {
 
-     let close = () => this.setState({ show: false});
+     let closeTimeRange = () => this.setState({ showTimeRange: false});
+     let closeBucketName = () => this.setState({ showBucketName: false});
 
     return (
 
       <div className="App">
+		  <div className="header">
+			  <Button id="Sentry" bsStyle="link" bsSize="large">SENTRY</Button>
+			  <Button id="link" bsStyle="link" onClick={this.openTimeRangeWindow.bind(this)}>Time range</Button>
+			  <Button id="link" bsStyle="link" onClick={this.openBucketNameWindow.bind(this)}>Change bucket name</Button>
+		  </div>
+	  <Modal show={this.state.showTimeRange} onHide={closeTimeRange} container={this} aria-labelledby="contained-modal-title">
+	  <Modal.Body>
+	  <div>
+	  <form onSubmit={this.handleSubmitTimeRange.bind(this)}>
+ 	 <div>
+ 		 <br />
+ 		 <label style={{color:'black'}}>Start Date & Time</label><br />
+ 		 <input style={{margin:'5px'}} type="date" ref="startDate" />
+ 		 <input type="time" ref="startTime" />
+ 	 </div>
+ 	 <div>
+ 		 <br />
+ 		 <label style={{color:'black'}}>End Date & Time</label><br />
+ 		 <input style={{margin:'5px'}} type="date" ref="endDate" />
+ 		 <input type="time" ref="endTime" />
+ 	 </div>
+ 	 <div className="buttons">
+ 		 <br />
+ 		 <Button onClick={closeTimeRange}>Cancel</Button>
+ 		 <Button bsStyle="primary" type="submit">Submit</Button>
+ 	 </div>
+ 	 </form>
+	 </div>
+	  </Modal.Body>
 
-        <p className="App-intro">
-              <Navbar inverse collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a>Sentry</a>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
+	  </Modal>
 
-           <Navbar.Collapse>
-            <Nav>
-            </Nav>
-            <Nav pullRight>
-                         <NavItem onClick={() => this.setState({ show: true})}>Time Range
+	  <Modal show={this.state.showBucketName} onHide={closeBucketName} container={this} aria-labelledby="contained-modal-title">
+	  <Modal.Body>
+	  <div>
+			<h4>Enter bucket name</h4>
+			<input type="text" placeholder="Bucket name" />
+			<div className="buttons">
+				<br />
+				<Button onClick={closeBucketName}>Cancel</Button>
+				<Button bsStyle="primary" onClick={this.handleSubmitBucketName.bind(this)}>Submit</Button>
+			</div>
+		</div>
+	  </Modal.Body>
+	  </Modal>
 
-                        <div className="modal-container">
-                         <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
-                          <Modal.Header closeButton>
-                          <Modal.Body>
-                              <div className="BucketInfo">
-                                <form onSubmit={this.handleSubmit.bind(this)}>
-                                <div>
-                                  <br />
-                                    <label style={{color:'black'}}>Start Date & Time</label><br />
-                                    <input style={{margin:'5px'}} type="date" ref="startDate" />
-                                    <input type="time" ref="startTime" />
-                                </div>
-                                <div>
-                                  <br />
-                                    <label style={{color:'black'}}>End Date & Time</label><br />
-                                    <input style={{margin:'5px'}} type="date" ref="endDate" />
-                                    <input type="time" ref="endTime" />
-                                </div>
-                                <br />
-                                    <input type="submit" value="Submit" />
-                              </form>
-                              </div>
-                           </Modal.Body>
-                          </Modal.Header>
-
-                           <Modal.Footer>
-                            <Button onClick={close}>Close</Button>
-                           </Modal.Footer>
-                        </Modal>
-                  </div>
-              </NavItem>
-                <NavDropdown eventKey={3} title="Buckets" id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>Bucket 1</MenuItem>
-                  <MenuItem eventKey={3.2}>Buchet 2</MenuItem>
-                  <MenuItem eventKey={3.3}>Bucket 3</MenuItem>
-                  <MenuItem divider />
-
-                </NavDropdown>
-              </Nav>
-          </Navbar.Collapse>
-          </Navbar>
-          </p>
-
-
-
+		  <br />
             <Chart data={this.state.data} objects={this.state.objects} textColor='#424242' gridColor='hsla(0, 0%, 75%, 0.84)'/>
 
 
@@ -281,3 +266,60 @@ handleSubmit(e) {
 }
 
 export default Dashboard;
+// <p className="App-intro">
+// <Navbar inverse collapseOnSelect>
+// <Navbar.Header>
+// <Navbar.Brand>
+// <a>Sentry</a>
+// </Navbar.Brand>
+// <Navbar.Toggle />
+// </Navbar.Header>
+//
+// <Navbar.Collapse>
+// <Nav>
+// </Nav>
+// <Nav pullRight>
+// <NavItem onClick={() => this.setState({ show: true})}>Time Range
+//
+// <div className="modal-container">
+// <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
+// <Modal.Header closeButton>
+// <Modal.Body>
+// <div className="BucketInfo">
+// <form onSubmit={this.handleSubmit.bind(this)}>
+// <div>
+// <br />
+// <label style={{color:'black'}}>Start Date & Time</label><br />
+// <input style={{margin:'5px'}} type="date" ref="startDate" />
+// <input type="time" ref="startTime" />
+// </div>
+// <div>
+// <br />
+// <label style={{color:'black'}}>End Date & Time</label><br />
+// <input style={{margin:'5px'}} type="date" ref="endDate" />
+// <input type="time" ref="endTime" />
+// </div>
+// <br />
+// <input type="submit" value="Submit" />
+// </form>
+// </div>
+// </Modal.Body>
+// </Modal.Header>
+//
+// <Modal.Footer>
+// <Button onClick={close}>Close</Button>
+// </Modal.Footer>
+// </Modal>
+// </div>
+// </NavItem>
+// <NavDropdown eventKey={3} title="Buckets" id="basic-nav-dropdown">
+// <MenuItem eventKey={3.1}>Bucket 1</MenuItem>
+// <MenuItem eventKey={3.2}>Buchet 2</MenuItem>
+// <MenuItem eventKey={3.3}>Bucket 3</MenuItem>
+// <MenuItem divider />
+//
+// </NavDropdown>
+// </Nav>
+// </Navbar.Collapse>
+// </Navbar>
+// </p>
