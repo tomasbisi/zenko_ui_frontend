@@ -1,9 +1,9 @@
 # You should always specify a full version here to ensure all of your developers
 # are running the same version of Node.
-FROM node:6.11.4
+FROM node:6.11.4-slim
 
 # Install and configure `serve`.
-RUN yarn add serve
+RUN yarn global add serve
 CMD serve -s build
 EXPOSE 5000
 
