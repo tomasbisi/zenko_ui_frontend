@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Dashboard from './Dashboard';
-import Login from './Login'
 import Info from './Components/Info'
 
 import registerServiceWorker from './registerServiceWorker';
